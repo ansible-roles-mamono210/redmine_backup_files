@@ -1,0 +1,17 @@
+---
+- name: Create working directory
+  ansible.builtin.file:
+    path: '{{ redmine_backup_data_dir }}'
+    recurse: yes
+    state: directory
+
+- name: If previous data remains, delete the data
+  ansible.builtin.file:
+    path: "{{ redmine_backup_data_dir }}/{{ redmine_archived_media_file }}"
+    state: absent
+
+- name: Archive Redmine media files
+  community.general.files.archive:
+    path: "{{ redmine_file_dir }}"
+    dest: "{{ redmine_backup_data_dir }}/{{ redmine_archived_media_file }}"
+    mode: 0755
