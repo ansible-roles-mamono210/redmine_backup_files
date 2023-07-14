@@ -11,7 +11,7 @@
     state: absent
 
 - name: Archive Redmine media files
-  community.general.files.archive:
+  community.general.archive:
     path: "{{ redmine_file_dir }}"
     dest: "{{ redmine_backup_data_dir }}/{{ redmine_archived_media_file }}"
     mode: 0755
